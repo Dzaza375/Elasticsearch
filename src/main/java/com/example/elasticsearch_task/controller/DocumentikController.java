@@ -39,7 +39,7 @@ public class DocumentikController {
     }
 
     @PostMapping("/find")
-    public String findDocument(@RequestParam String text, Model model) {
+    public String findDocument(@RequestParam String query, Model model) {
         return "find-results";
     }
 }
