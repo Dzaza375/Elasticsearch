@@ -1,5 +1,6 @@
 package com.example.elasticsearch_task.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -22,6 +23,7 @@ public class DocumentikDTO {
 
     @NotNull(message = "Data cannot be empty")
     @PastOrPresent(message = "Data cannot be from the future")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate dateAdded;
 }

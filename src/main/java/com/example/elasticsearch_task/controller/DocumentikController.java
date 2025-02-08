@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/documents")
@@ -38,8 +40,13 @@ public class DocumentikController {
         return "find-documents-form";
     }
 
-    @PostMapping("/find")
+    @GetMapping("/find/results")
     public String findDocument(@RequestParam String query, Model model) {
+        List<DocumentikDTO> documents = null;
+
+        if(query != null && !query.isEmpty()) documents = documentikService.findDocumentiksByContaining(query);
+
+        model.addAttribute("documents", documents);
         return "find-results";
     }
 }

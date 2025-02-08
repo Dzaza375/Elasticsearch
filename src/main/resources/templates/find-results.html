@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Results</title>
 </head>
 <body>
+    <div th:if="${documents == null or #lists.isEmpty(documents)}">
+        <p>Documents not found</p>
+    </div>
 
+    <div th:each="doc : ${documents}">
+        <p><span th:text="${doc.text}">Text</span></p>
+        <p><strong>Date added: </strong><span th:text="${doc.dateAdded}">Date</span></p>
+    </div>
 </body>
 </html>

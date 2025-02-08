@@ -6,6 +6,8 @@ import com.example.elasticsearch_task.repo.DocumentikRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -14,5 +16,9 @@ public class DocumentikService {
 
     public void createDocumentik(DocumentikDTO documentikDTO) {
         documentikRepo.save(DocumentikMapper.toEntity(documentikDTO));
+    }
+
+    public List<DocumentikDTO> findDocumentiksByContaining(String query) {
+        return DocumentikMapper.toDtoList(documentikRepo.findByTextContainingIgnoreCase(query));
     }
 }
