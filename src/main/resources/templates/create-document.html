@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Document</title>
+</head>
+<body>
+  <form th:action="@{/documents/create}" method="post" th:object="${documentikDTO}">
+    <label for="text">Текст документа: </label><br>
+    <textarea id="text" th:field="*{text}" required></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Text error</div>
+    <br>
+
+    <label for="dateAdded">Дата добавления: </label>
+    <input type="date" id="dateAdded" th:field="*{dateAdded}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('dateAdded')}" th:errors="*{dateAdded}">Date error</div>
+    <br><br>
+
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
