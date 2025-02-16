@@ -14,16 +14,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class DocumentikDTO {
-    @NotNull(message = "Id cannot be empty")
-    private String id;
-
     @NotBlank(message = "Text cannot be empty")
     @Size(min = 5, max = 500, message = "Text is too big or too small")
     private String text;
 
     @NotNull(message = "Data cannot be empty")
     @PastOrPresent(message = "Data cannot be from the future")
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAdded;
 }

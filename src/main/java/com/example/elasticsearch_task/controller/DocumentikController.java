@@ -27,11 +27,13 @@ public class DocumentikController {
                                     BindingResult bindingResult,
                                     Model model) {
         if(bindingResult.hasErrors()) {
+            System.out.println("Error");
             model.addAttribute("documentik", documentikDTO);
             return "create-document";
         }
 
         documentikService.createDocumentik(documentikDTO);
+        System.out.println("Created");
         return "redirect:/documents/create";
     }
 
