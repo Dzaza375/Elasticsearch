@@ -19,6 +19,6 @@ public class DocumentikService {
     }
 
     public List<DocumentikDTO> findDocumentiksByContaining(String query) {
-        return DocumentikMapper.toDtoList(documentikRepo.findByTextContainingIgnoreCase(query));
+        return DocumentikMapper.toDtoList(documentikRepo.searchByText(query));
     }
 }
