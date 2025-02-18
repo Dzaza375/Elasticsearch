@@ -1,6 +1,7 @@
 package com.example.elasticsearch_task.controller;
 
 import com.example.elasticsearch_task.dto.DocumentikDTO;
+import com.example.elasticsearch_task.enums.SortField;
 import com.example.elasticsearch_task.service.DocumentikService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class DocumentikController {
                           Model model) {
         List<DocumentikDTO> documents = null;
 
-        if (sortBy.equals("dateAdded") || sortBy.equals("text")) documents = documentikService.findAll(sortBy, page, size);
+        if (sortBy.equals("dateAdded") || sortBy.equals("text")) documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
 
         model.addAttribute("documents", documents);
         return "all-documents";
