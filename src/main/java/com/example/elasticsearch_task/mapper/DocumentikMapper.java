@@ -2,6 +2,7 @@ package com.example.elasticsearch_task.mapper;
 
 import com.example.elasticsearch_task.dto.DocumentikDTO;
 import com.example.elasticsearch_task.entity.Documentik;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,6 +19,12 @@ public class DocumentikMapper {
 
     public static List<DocumentikDTO> toDtoList(List<Documentik> entityList) {
         return entityList.stream()
+                .map(DocumentikMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public static List<DocumentikDTO> toDtoList(Page<Documentik> pageList) {
+        return pageList.getContent().stream()
                 .map(DocumentikMapper::toDto)
                 .collect(Collectors.toList());
     }
