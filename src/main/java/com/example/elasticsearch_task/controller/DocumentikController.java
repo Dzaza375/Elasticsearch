@@ -49,4 +49,12 @@ public class DocumentikController {
         model.addAttribute("documents", documents);
         return "find-results";
     }
+
+    @GetMapping("/all")
+    public String findAll(Model model) {
+        List<DocumentikDTO> documents = null;
+
+        model.addAttribute("documents", documents);
+        return "all-documents";
+    }
 }
