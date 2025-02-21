@@ -1,6 +1,7 @@
 package com.example.elasticsearch_task.controller;
 
 import com.example.elasticsearch_task.dto.DocumentikDTO;
+import com.example.elasticsearch_task.entity.Documentik;
 import com.example.elasticsearch_task.enums.SortField;
 import com.example.elasticsearch_task.responses.ErrorResponse;
 import com.example.elasticsearch_task.service.DocumentikService;
@@ -20,29 +21,25 @@ public class DocumentikRestController {
     private final DocumentikService documentikService;
 
     @PostMapping("/documents")
-    public ResponseEntity<?> createDocumentik(@Valid @RequestBody DocumentikDTO documentikDTO) {
-        try {
-            documentikService.createDocumentik(documentikDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(documentikDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponse("Error while creating a document: " + e.getMessage()));
-        }
+    public ResponseEntity<DocumentikDTO> createDocumentik(@Valid @RequestBody DocumentikDTO documentikDTO) {
+        DocumentikDTO createdDocument = documentikService.createDocumentik(documentikDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDocument);
     }
 
     @GetMapping("/documents")
     public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "dateAdded") String sortBy,
                                     @RequestParam(required = false, defaultValue = "0") int page,
                                     @RequestParam(required = false, defaultValue = "10") int size) {
-        try
-        {
-            List<DocumentikDTO> documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
+        List<DocumentikDTO> documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
 
-            if (!documents.isEmpty()) return ResponseEntity.ok(documents);
-            else return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponse("Error: " + e.getMessage()));
-        }
+        return documents.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(documents);
+    }
+
+    @DeleteMapping("/documents/{docId}")
+    public ResponseEntity<Void> deleteDocumentik(@PathVariable(value = "docId") String docId) {
+        documentikService.deleteDocumentik(docId);
+        return ResponseEntity.noContent().build();
     }
 }
