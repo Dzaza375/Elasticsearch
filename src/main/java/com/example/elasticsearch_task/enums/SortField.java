@@ -9,7 +9,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum SortField {
     DATE_ADDED("dateAdded", Sort.by("dateAdded")),
-    TEXT("text", Sort.by("text"));
+    TEXT("text", Sort.by("text.keyword"));
 
     private final String fieldName;
 

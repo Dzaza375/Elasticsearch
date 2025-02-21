@@ -56,10 +56,7 @@ public class DocumentikController {
                           @RequestParam(required = false, defaultValue = "0") int page,
                           @RequestParam(required = false, defaultValue = "10") int size,
                           Model model) {
-        List<DocumentikDTO> documents = null;
-
-        if (sortBy.equals("dateAdded") || sortBy.equals("text")) documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
-
+        List<DocumentikDTO> documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
         model.addAttribute("documents", documents);
         return "all-documents";
     }
