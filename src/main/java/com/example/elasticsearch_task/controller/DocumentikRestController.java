@@ -27,7 +27,7 @@ public class DocumentikRestController {
     }
 
     @GetMapping("/documents")
-    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "dateAdded") String sortBy,
+    public ResponseEntity<List<DocumentikDTO>> getAll(@RequestParam(required = false, defaultValue = "dateAdded") String sortBy,
                                     @RequestParam(required = false, defaultValue = "0") int page,
                                     @RequestParam(required = false, defaultValue = "10") int size) {
         List<DocumentikDTO> documents = documentikService.findAll(SortField.fromString(sortBy), page, size);
